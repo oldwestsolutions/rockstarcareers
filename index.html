@@ -570,7 +570,33 @@
             }
 
             .logo {
-                font-size: 2rem;
+                font-size: 1.8rem;
+                letter-spacing: 2px;
+            }
+
+            .search-bar {
+                display: flex;
+                align-items: center;
+            }
+
+            .search-bar input {
+                padding: 15px 20px;
+                font-size: 1rem;
+            }
+
+            .search-bar button {
+                padding: 15px 20px;
+                white-space: nowrap;
+                font-size: 0.9rem;
+            }
+
+            .header-icons {
+                gap: 15px;
+            }
+
+            .icon-link .icon {
+                width: 20px;
+                height: 20px;
             }
 
             .job-grid {
@@ -591,23 +617,16 @@
             .job-meta > div {
                 width: 100%;
             }
-
-            .search-container {
-                flex-direction: column;
-                gap: 10px;
+        }
+        
+        /* Add extra small screen optimization */
+        @media screen and (max-width: 360px) {
+            .logo {
+                font-size: 1.5rem;
             }
 
-            .search-input {
-                width: 100%;
-            }
-
-            .filters {
-                flex-wrap: wrap;
-                gap: 10px;
-            }
-
-            .filter-button {
-                width: calc(50% - 5px);
+            .search-bar button {
+                padding: 15px;
             }
         }
         
