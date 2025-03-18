@@ -1,0 +1,1297 @@
+    <!-- Sample Modal (Hidden by default) -->
+    <div class="modal" id="application-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Application Portal</h3>
+                <span class="modal-close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p>Submit your manuscript for consideration to this distinguished position.</p>
+                <p>Our council of reviewers will examine your qualifications with the utmost discretion.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline">Cancel</button>
+                <button class="btn">Submit</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Add modal functionality
+        document.addEventListener('DOMContentLoaded', function() {        /* Page Decorations - Keep these even though we replaced the block above */
+        .page-decoration {
+            position: fixed;
+            z-index: -1;
+            opacity: 0.015;
+            pointer-events: none;
+        }
+        
+        .page-decoration.top-left {
+            top: 20px;
+            left: 20px;
+            width: 100px;
+            height: 100px;
+            border-top: 1px solid var(--text-white);
+            border-left: 1px solid var(--text-white);
+            border-radius: 15px 0 0 0;
+        }
+        
+        .page-decoration.top-right {
+            top: 20px;
+            right: 20px;
+            width: 100px;
+            height: 100px;
+            border-top: 1px solid var(--text-white);
+            border-right: 1px solid var(--text-white);
+            border-radius: 0 15px 0 0;
+        }
+        
+        .page-decoration.bottom-left {
+            bottom: 20px;
+            left: 20px;
+            width: 100px;
+            height: 100px;
+            border-bottom: 1px solid var(--text-white);
+            border-left: 1px solid var(--text-white);
+            border-radius: 0 0 0 15px;
+        }
+        
+        .page-decoration.bottom-right {
+            bottom: 20px;
+            right: 20px;
+            width: 100px;
+            height: 100px;
+            border-bottom: 1px solid var(--text-white);
+            border-right: 1px solid var(--text-white);
+            border-radius: 0 0 15px 0;
+        }    <!-- Page Decorations -->
+    <div class="page-decoration top-left"></div>
+    <div class="page-decoration top-right"></div>
+    <div class="page-decoration bottom-left"></div>
+    <div class="page-decoration bottom-right"></div><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RockstarCareers.com - Professional Career Platform</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+        
+        :root {
+            --dark-bg: #080808;
+            --darker-bg: #000000;
+            --accent-dark: #222;
+            --accent-color: #333333;
+            --accent-color-hover: #555555;
+            --text-light: #cccccc;
+            --text-white: #f5f5f5;
+            --text-muted: #999999;
+            --shadow-color: rgba(0, 0, 0, 0.7);
+            --border-color: #232323;
+            --card-bg: #101010;
+            --card-hover: #1a1a1a;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: var(--dark-bg);
+            background-image: 
+                linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)),
+                url("data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23191919' fill-opacity='0.15'%3E%3Cpath d='M15 0C6.716 0 0 6.716 0 15c0 8.284 6.716 15 15 15 8.284 0 15-6.716 15-15 0-8.284-6.716-15-15-15zm0 2c7.18 0 13 5.82 13 13s-5.82 13-13 13S2 22.18 2 15 7.82 2 15 2z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            color: var(--text-light);
+            font-family: 'Cormorant Garamond', serif;
+            line-height: 1.7;
+            min-height: 100vh;
+            letter-spacing: 0.02em;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background-color: var(--darker-bg);
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            padding: 10px 0;
+        }
+        
+        .header-content {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 35px 0;
+            z-index: 2;
+        }
+        
+        .header-content::before,
+        .header-content::after {
+            content: "";
+            position: absolute;
+            width: 150px;
+            height: 1px;
+            background: rgba(204, 204, 204, 0.15);
+        }
+        
+        .header-content::before {
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .header-content::after {
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .logo {
+            font-family: 'IM Fell English', serif;
+            font-size: 3.5rem;
+            font-weight: 400;
+            margin-bottom: 12px;
+            text-align: center;
+            color: var(--text-white);
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+            letter-spacing: 4px;
+            position: relative;
+            text-transform: uppercase;
+        }
+        
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 1px;
+            background: var(--text-light);
+        }
+        
+        .logo-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            font-weight: 300;
+            color: var(--text-light);
+            font-style: italic;
+            margin-bottom: 10px;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+        
+        nav {
+            background-color: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(5px);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .nav-list {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 50px;
+        }
+        
+        .nav-list li a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            position: relative;
+            padding-bottom: 5px;
+            font-weight: 400;
+            font-family: 'IM Fell English', serif;
+        }
+        
+        .nav-list li a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--text-white);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-list li a:hover {
+            color: var(--text-white);
+        }
+        
+        .nav-list li a:hover:after {
+            width: 100%;
+        }
+        
+        .hero {
+            background-image: url('/api/placeholder/1200/600');
+            background-size: cover;
+            background-position: center;
+            height: 500px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--text-white);
+            margin-bottom: 60px;
+        }
+        
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.9), rgba(10, 10, 10, 0.7));
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+        
+        .hero h2 {
+            font-family: 'IM Fell English', serif;
+            font-size: 3.2rem;
+            font-weight: 400;
+            margin-bottom: 25px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            line-height: 1.2;
+            letter-spacing: 1px;
+        }
+        
+        .hero p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-style: italic;
+            margin-bottom: 35px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.7;
+        }
+        
+        .search-bar {
+            display: flex;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid var(--text-muted);
+            border-radius: 8px;
+            overflow: hidden;
+            width: 100%;
+            max-width: 700px;
+            margin: 0 auto;
+            box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
+        }
+        
+        .search-bar input {
+            flex: 1;
+            padding: 18px 25px;
+            border: none;
+            outline: none;
+            color: var(--text-white);
+            background: transparent;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            font-style: italic;
+            letter-spacing: 1px;
+        }
+        
+        .search-bar input::placeholder {
+            color: var(--text-muted);
+            opacity: 0.7;
+        }
+        
+        .search-bar button {
+            background: var(--darker-bg);
+            color: var(--text-white);
+            border: none;
+            border-left: 1px solid var(--text-muted);
+            padding: 0 30px;
+            cursor: pointer;
+            font-family: 'IM Fell English', serif;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            background-image: linear-gradient(to bottom, rgba(50, 50, 50, 0.3), rgba(0, 0, 0, 0.3));
+        }
+        
+        .search-bar button:hover {
+            background-color: #222;
+        }
+        
+        .search-bar button:hover {
+            background: var(--accent-color-hover);
+        }
+        
+        main {
+            padding: 0 0 60px;
+        }
+        
+        .section-title {
+            font-family: 'IM Fell English', serif;
+            font-size: 2.4rem;
+            font-weight: 400;
+            margin-bottom: 15px;
+            text-align: center;
+            color: var(--text-white);
+            position: relative;
+            padding-bottom: 15px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 1px;
+            background: var(--text-muted);
+        }
+        
+        .section-title:before {
+            content: '✧';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1rem;
+            color: var(--text-muted);
+            background: var(--dark-bg);
+            padding: 0 10px;
+            z-index: 1;
+        }
+        
+        .section-description {
+            text-align: center;
+            max-width: 700px;
+            margin: 10px auto 50px;
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            letter-spacing: 0.5px;
+        }
+        
+        .featured-jobs {
+            margin-bottom: 80px;
+        }
+        
+        .job-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .job-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            position: relative;
+            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4);
+        }
+        
+        .job-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
+            border-color: var(--text-light);
+        }
+        
+        .job-bookmark {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .job-bookmark:hover {
+            color: var(--accent-color);
+        }
+        
+        .job-card-header {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .company-logo {
+            width: 50px;
+            height: 50px;
+            background-color: var(--darker-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: normal;
+            color: var(--text-white);
+            font-family: 'IM Fell English', serif;
+            font-size: 1.2rem;
+            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            background-image: linear-gradient(to bottom, rgba(40, 40, 40, 0.5), rgba(10, 10, 10, 0.5));
+        }
+        
+        .job-title {
+            font-family: 'IM Fell English', serif;
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: var(--text-white);
+            margin-bottom: 5px;
+            line-height: 1.3;
+            letter-spacing: 0.5px;
+        }
+        
+        .company-name {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            letter-spacing: 0.5px;
+        }
+        
+        .job-card-body {
+            padding: 0 20px 20px;
+        }
+        
+        .job-details {
+            margin-bottom: 15px;
+        }
+        
+        .job-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+        }
+        
+        .job-meta div {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .job-description {
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--darker-bg);
+            color: var(--text-white);
+            padding: 10px 24px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-family: 'IM Fell English', serif;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-size: 0.9rem;
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+            background-image: linear-gradient(to bottom, rgba(50, 50, 50, 0.3), rgba(0, 0, 0, 0.3));
+        }
+        
+        .btn:hover {
+            background: var(--text-white);
+            color: var(--darker-bg);
+            border-color: var(--text-white);
+            transform: translateY(-2px);
+            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4);
+        }
+        
+        .btn:active {
+            transform: translateY(1px);
+            box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--text-light);
+            color: var(--text-light);
+            background-image: linear-gradient(to bottom, rgba(30, 30, 30, 0.2), rgba(10, 10, 10, 0.2));
+        }
+        
+        .btn-outline:hover {
+            background: var(--text-white);
+            color: var(--darker-bg);
+            border-color: var(--text-white);
+            background-image: none;
+        }
+        
+        .job-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .job-tag {
+            background: rgba(0, 0, 0, 0.3);
+            color: var(--text-light);
+            padding: 5px 10px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            border: 1px solid var(--border-color);
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+            background-image: linear-gradient(to bottom, rgba(40, 40, 40, 0.3), rgba(10, 10, 10, 0.3));
+        }
+        
+        .view-more {
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        .categories {
+            margin-bottom: 80px;
+        }
+        
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .category-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .category-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+        
+        .category-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-white);
+            margin-bottom: 10px;
+        }
+        
+        .category-count {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        .testimonials {
+            margin-bottom: 80px;
+            position: relative;
+        }
+        
+        .testimonial-container {
+            position: relative;
+            overflow: hidden;
+            padding: 60px 20px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--border-color);
+            background-image: linear-gradient(to bottom, rgba(25, 25, 25, 0.5), rgba(10, 10, 10, 0.5));
+        }
+        
+        .testimonial-container:before,
+        .testimonial-container:after {
+            content: '"';
+            position: absolute;
+            font-size: 8rem;
+            font-family: 'IM Fell English', serif;
+            opacity: 0.05;
+            color: var(--text-white);
+            line-height: 1;
+        }
+        
+        .testimonial-container:before {
+            top: 20px;
+            left: 30px;
+        }
+        
+        .testimonial-container:after {
+            bottom: -30px;
+            right: 30px;
+        }
+        
+        .testimonial {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .testimonial-text {
+            font-size: 1.4rem;
+            font-style: italic;
+            margin-bottom: 30px;
+            color: var(--text-white);
+            font-family: 'Cormorant Garamond', serif;
+            line-height: 1.8;
+            letter-spacing: 0.5px;
+            position: relative;
+            padding: 0 20px;
+        }
+        
+        .testimonial-text::before,
+        .testimonial-text::after {
+            content: '"';
+            font-family: 'IM Fell English', serif;
+            font-size: 2.5rem;
+            position: absolute;
+            color: var(--text-muted);
+            line-height: 1;
+        }
+        
+        .testimonial-text::before {
+            left: -10px;
+            top: -10px;
+        }
+        
+        .testimonial-text::after {
+            right: -10px;
+            bottom: -30px;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .author-name {
+            font-weight: 600;
+            color: var(--accent-color);
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+        
+        .author-job {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        
+        .stats-section {
+            margin-bottom: 80px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+        
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+            background-image: linear-gradient(to bottom, rgba(30, 30, 30, 0.5), rgba(10, 10, 10, 0.5));
+        }
+        
+        .stat-number {
+            font-family: 'IM Fell English', serif;
+            font-size: 3rem;
+            font-weight: 400;
+            color: var(--text-white);
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+        
+        .stat-label {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            letter-spacing: 0.5px;
+        }
+        
+        .cta-section {
+            text-align: center;
+            padding: 80px 40px;
+            background: linear-gradient(to bottom, rgba(15, 15, 15, 0.9), rgba(5, 5, 5, 0.9));
+            border-radius: 12px;
+            margin-bottom: 80px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section::before, 
+        .cta-section::after {
+            content: "";
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border: 1px solid rgba(204, 204, 204, 0.1);
+            z-index: 0;
+            border-radius: 15px;
+        }
+        
+        .cta-section::before {
+            top: 20px;
+            left: 20px;
+            border-right: none;
+            border-bottom: none;
+        }
+        
+        .cta-section::after {
+            bottom: 20px;
+            right: 20px;
+            border-left: none;
+            border-top: none;
+        }
+        
+        .cta-title {
+            font-family: 'IM Fell English', serif;
+            font-size: 2.5rem;
+            font-weight: 400;
+            margin-bottom: 25px;
+            color: var(--text-white);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta-text {
+            max-width: 700px;
+            margin: 0 auto 40px;
+            font-size: 1.2rem;
+            color: var(--text-light);
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            line-height: 1.8;
+            letter-spacing: 0.5px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        footer {
+            background-color: var(--darker-bg);
+            border-top: 1px solid var(--border-color);
+            padding: 80px 0 40px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+        
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--text-white);
+        }
+        
+        .footer-description {
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--accent-dark);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            color: var(--text-light);
+            font-size: 1.2rem;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            background-image: linear-gradient(to bottom, rgba(60, 60, 60, 0.3), rgba(20, 20, 20, 0.3));
+        }
+        
+        .social-icon:hover {
+            background: var(--text-white);
+            transform: translateY(-3px);
+            color: var(--darker-bg);
+            box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.4);
+        }
+        
+        .footer-heading {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--text-white);
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .footer-heading:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--accent-color);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+        
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            display: inline-block;
+            font-size: 0.95rem;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent-color);
+            padding-left: 5px;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid var(--accent-dark);
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        
+        /* Windows XP Style Modal */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .modal-content {
+            background: var(--card-bg);
+            border-radius: 10px;
+            width: 90%;
+            max-width: 600px;
+            padding: 20px;
+            position: relative;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.6);
+            border: 1px solid var(--border-color);
+            background-image: linear-gradient(to bottom, rgba(35, 35, 35, 0.95), rgba(15, 15, 15, 0.95));
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 15px;
+            background: var(--darker-bg);
+            margin: -20px -20px 15px;
+            border-radius: 10px 10px 0 0;
+            border-bottom: 1px solid var(--border-color);
+            background-image: linear-gradient(to bottom, rgba(40, 40, 40, 0.9), rgba(20, 20, 20, 0.9));
+        }
+        
+        .modal-title {
+            font-family: 'IM Fell English', serif;
+            color: var(--text-white);
+            font-size: 1.4rem;
+            margin: 0;
+            letter-spacing: 1px;
+        }
+        
+        .modal-close {
+            background: rgba(70, 70, 70, 0.8);
+            border: 1px solid var(--border-color);
+            color: var(--text-white);
+            width: 24px;
+            height: 24px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 14px;
+            box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+            background-image: linear-gradient(to bottom, rgba(60, 60, 60, 0.8), rgba(30, 30, 30, 0.8));
+        }
+        
+        .modal-close:hover {
+            background: rgba(200, 0, 0, 0.8);
+        }
+        
+        .modal-body {
+            padding: 10px 0;
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--text-light);
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
+        .modal-footer {
+            padding: 15px 0 0;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            border-top: 1px solid var(--border-color);
+            margin-top: 15px;
+        }
+        
+        .trending-searches {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 30px;
+            font-size: 1rem;
+            color: var(--text-muted);
+            font-style: italic;
+            font-family: 'Cormorant Garamond', serif;
+        }
+        
+        .trending-searches span {
+            display: inline-block;
+            margin: 0 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 1px dotted rgba(153, 153, 153, 0.3);
+            padding-bottom: 2px;
+        }
+        
+        .trending-searches span:hover {
+            color: var(--text-white);
+            border-bottom: 1px dotted var(--text-white);
+        }
+        
+        .job-salary {
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+        
+        .new-badge {
+            background: rgba(156, 124, 56, 0.2);
+            color: var(--accent-color);
+            font-size: 0.7rem;
+            padding: 3px 8px;
+            border-radius: 20px;
+            margin-left: 10px;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
+            vertical-align: middle;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-list {
+                flex-direction: column;
+                gap: 15px;
+                align-items: center;
+            }
+            
+            .job-grid, .category-grid, .stats-grid, .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .button-group {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .logo {
+                font-size: 2.5rem;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .cta-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1 class="logo">RockstarCareers</h1>
+            <p class="logo-subtitle">Chronicles of Professional Destiny</p>
+        </div>
+    </header>
+    
+    <nav>
+        <div class="container">
+            <ul class="nav-list">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Find Jobs</a></li>
+                <li><a href="#">Companies</a></li>
+                <li><a href="#">Career Resources</a></li>
+                <li><a href="#">For Employers</a></li>
+                <li><a href="#">Sign In</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Discover Your Next Career Opportunity</h2>
+            <p>Unveil positions worthy of your talents within the shadows of the industry.</p>
+            <div class="search-bar">
+                <input type="text" placeholder="Position title, skills, location...">
+                <button>Search</button>
+            </div>
+            <div class="trending-searches">
+                Whispered inquiries: <span>Nocturnalist</span> • <span>Arcane Affairs</span> • <span>Shadow Curator</span> • <span>Ethereal Design</span>
+            </div>
+        </div>
+    </section>
+    
+    <main class="container">
+        <!-- Removed quick filters section as requested -->
+        
+        <section class="featured-jobs">
+            <h2 class="section-title">The Chronicle of Vacancies</h2>
+            <p class="section-description">Positions of distinction for the discerning professional</p>
+            
+            <div class="job-grid">
+                <div class="job-card">
+                    <div class="job-bookmark">☆</div>
+                    <div class="job-card-header">
+                        <div class="company-logo">NV</div>
+                        <div>
+                            <h3 class="job-title">Senior Audio Engineer <span class="new-badge">New</span></h3>
+                            <p class="company-name">Nocturne Studios</p>
+                        </div>
+                    </div>
+                    <div class="job-card-body">
+                        <div class="job-meta">
+                            <div>📍 Los Angeles, CA</div>
+                            <div>💰 <span class="job-salary">$95K - $120K</span></div>
+                            <div>⏰ Full-time</div>
+                        </div>
+                        <div class="job-description">
+                            Oversee recording sessions and audio production for high-profile artists. Expertise in analog and digital recording techniques required with attention to sonic detail.
+                        </div>
+                        <div class="job-tags">
+                            <span class="job-tag">Pro Tools</span>
+                            <span class="job-tag">Mixing</span>
+                            <span class="job-tag">Mastering</span>
+                        </div>
+                        <a href="#" class="btn">Apply Now</a>
+                    </div>
+                </div>
+                
+                <div class="job-card">
+                    <div class="job-bookmark">☆</div>
+                    <div class="job-card-header">
+                        <div class="company-logo">DR</div>
+                        <div>
+                            <h3 class="job-title">Artist Relations Manager</h3>
+                            <p class="company-name">Draconis Records</p>
+                        </div>
+                    </div>
+                    <div class="job-card-body">
+                        <div class="job-meta">
+                            <div>📍 Remote</div>
+                            <div>💰 <span class="job-salary">$70K - $90K</span></div>
+                            <div>⏰ Full-time</div>
+                        </div>
+                        <div class="job-description">
+                            Build and maintain relationships between the label and artists. Facilitate communication, contract negotiations, and ensure artist satisfaction while representing label interests.
+                        </div>
+                        <div class="job-tags">
+                            <span class="job-tag">Negotiation</span>
+                            <span class="job-tag">A&R</span>
+                            <span class="job-tag">Communication</span>
+                        </div>
+                        <a href="#" class="btn">Apply Now</a>
+                    </div>
+                </div>
+                
+                <div class="job-card">
+                    <div class="job-bookmark">☆</div>
+                    <div class="job-card-header">
+                        <div class="company-logo">OM</div>
+                        <div>
+                            <h3 class="job-title">Tour Manager <span class="new-badge">New</span></h3>
+                            <p class="company-name">Onyx Management</p>
+                        </div>
+                    </div>
+                    <div class="job-card-body">
+                        <div class="job-meta">
+                            <div>📍 New York + Travel</div>
+                            <div>💰 <span class="job-salary">$85K - $110K</span></div>
+                            <div>⏰ Contract</div>
+                        </div>
+                        <div class="job-description">
+                            Coordinate all aspects of artist touring including logistics, venues, transportation, and personnel. Strong organizational skills and industry experience required.
+                        </div>
+                        <div class="job-tags">
+                            <span class="job-tag">Logistics</span>
+                            <span class="job-tag">Event Management</span>
+                            <span class="job-tag">Tour Planning</span>
+                        </div>
+                        <a href="#" class="btn">Apply Now</a>
+                    </div>
+                </div>
+                
+                <div class="job-card">
+                    <div class="job-bookmark">☆</div>
+                    <div class="job-card-header">
+                        <div class="company-logo">CV</div>
+                        <div>
+                            <h3 class="job-title">Music Legal Counsel</h3>
+                            <p class="company-name">Corvus Media Group</p>
+                        </div>
+                    </div>
+                    <div class="job-card-body">
+                        <div class="job-meta">
+                            <div>📍 London, UK</div>
+                            <div>💰 <span class="job-salary">£75K - £95K</span></div>
+                            <div>⏰ Full-time</div>
+                        </div>
+                        <div class="job-description">
+                            Provide legal advice on contracts, intellectual property, licensing agreements, and other music industry matters. Strong background in entertainment law required.
+                        </div>
+                        <div class="job-tags">
+                            <span class="job-tag">Legal</span>
+                            <span class="job-tag">IP Law</span>
+                            <span class="job-tag">Contracts</span>
+                        </div>
+                        <a href="#" class="btn">Apply Now</a>
+                    </div>
+                </div>
+                
+                <div class="job-card">
+                    <div class="job-bookmark">☆</div>
+                    <div class="job-card-header">
+                        <div class="company-logo">ES</div>
+                        <div>
+                            <h3 class="job-title">Social Media Strategist</h3>
+                            <p class="company-name">Eclipse Strategies</p>
+                        </div>
+                    </div>
+                    <div class="job-card-body">
+                        <div class="job-meta">
+                            <div>📍 Remote</div>
+                            <div>💰 <span class="job-salary">$60K - $75K</span></div>
+                            <div>⏰ Full-time</div>
+                        </div>
+                        <div class="job-description">
+                            Develop and implement comprehensive social media campaigns for artists and labels. Create engaging content and grow audience engagement across platforms.
+                        </div>
+                        <div class="job-tags">
+                            <span class="job-tag">Content Strategy</span>
+                            <span class="job-tag">Analytics</span>
+                            <span class="job-tag">Brand Building</span>
+                        </div>
+                        <a href="#" class="btn">Apply Now</a>
+                    </div>
+                </div>
+                
+                <div class="job-card">
+                    <div class="job-bookmark">☆</div>
+                    <div class="job-card-header">
+                        <div class="company-logo">VF</div>
+                        <div>
+                            <h3 class="job-title">Music Video Director</h3>
+                            <p class="company-name">Veil Films</p>
+                        </div>
+                    </div>
+                    <div class="job-card-body">
+                        <div class="job-meta">
+                            <div>📍 Berlin, Germany</div>
+                            <div>💰 <span class="job-salary">€70K - €90K</span></div>
+                            <div>⏰ Project-based</div>
+                        </div>
+                        <div class="job-description">
+                            Direct visually compelling music videos that enhance artists' vision. Lead production teams and collaborate closely with artists to realize creative concepts.
+                        </div>
+                        <div class="job-tags">
+                            <span class="job-tag">Cinematography</span>
+                            <span class="job-tag">Visual Arts</span>
+                            <span class="job-tag">Production</span>
+                        </div>
+                        <a href="#" class="btn">Apply Now</a>
+                    </div>
+                </div>
+                
