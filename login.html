@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - RockstarCareers.com</title>
+    <link rel="icon" type="image/jpeg" href="rockstarfav.jpeg">
+    <link rel="shortcut icon" type="image/jpeg" href="rockstarfav.jpeg">
+    <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        /* Import the root variables from index.html */
+        :root {
+            --dark-bg: #080808;
+            --darker-bg: #000000;
+            --accent-dark: #222;
+            --accent-color: #333333;
+            --accent-color-hover: #555555;
+            --text-light: #cccccc;
+            --text-white: #f5f5f5;
+            --text-muted: #999999;
+            --shadow-color: rgba(0, 0, 0, 0.7);
+            --border-color: #232323;
+            --card-bg: #101010;
+            --card-hover: #1a1a1a;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            background-image: 
+                linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)),
+                url("data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23191919' fill-opacity='0.15'%3E%3Cpath d='M15 0C6.716 0 0 6.716 0 15c0 8.284 6.716 15 15 15 8.284 0 15-6.716 15-15 0-8.284-6.716-15-15-15zm0 2c7.18 0 13 5.82 13 13s-5.82 13-13 13S2 22.18 2 15 7.82 2 15 2z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            color: var(--text-light);
+            font-family: 'Cormorant Garamond', serif;
+            line-height: 1.7;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: var(--darker-bg);
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            padding: 10px 0;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'IM Fell English', serif;
+            font-size: 3.5rem;
+            font-weight: 400;
+            color: var(--text-white);
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            text-decoration: none;
+        }
+
+        .login-container {
+            max-width: 400px;
+            margin: 60px auto;
+            padding: 40px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 0;
+            box-shadow: inset 0 1px rgba(255, 255, 255, 0.05),
+                        0 4px 6px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        /* Gothic corner decorations */
+        .login-container::before,
+        .login-container::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 1px solid var(--border-color);
+        }
+
+        .login-container::before {
+            top: 10px;
+            left: 10px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .login-container::after {
+            bottom: 10px;
+            right: 10px;
+            border-left: none;
+            border-top: none;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .login-header h1 {
+            font-family: 'IM Fell English', serif;
+            font-size: 2.5rem;
+            color: var(--text-white);
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .login-header p {
+            color: var(--text-muted);
+            font-style: italic;
+            font-size: 1.2rem;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--text-white);
+            margin-bottom: 8px;
+            font-family: 'IM Fell English', serif;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            background: var(--darker-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 0;
+            color: var(--text-white);
+            font-size: 1rem;
+            font-family: 'Cormorant Garamond', serif;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--text-white);
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            background: var(--darker-bg);
+            color: var(--text-white);
+            border: 1px solid var(--border-color);
+            font-family: 'IM Fell English', serif;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 20px;
+        }
+
+        .login-btn:hover {
+            background: var(--text-white);
+            color: var(--darker-bg);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-footer {
+            margin-top: 20px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .form-footer a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .form-footer a:hover {
+            color: var(--text-white);
+        }
+
+        .separator {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        .auth-divider {
+            position: relative;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .auth-divider::before,
+        .auth-divider::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 45%;
+            height: 1px;
+            background: var(--border-color);
+        }
+
+        .auth-divider::before {
+            left: 0;
+        }
+
+        .auth-divider::after {
+            right: 0;
+        }
+
+        .auth-divider span {
+            background: var(--card-bg);
+            padding: 0 10px;
+            color: var(--text-white);
+            font-size: 1.2rem;
+        }
+
+        .google-btn {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px;
+            background: var(--darker-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-white);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .google-btn:hover {
+            background: var(--accent-color);
+        }
+
+        .google-icon {
+            width: 20px;
+            height: 20px;
+            fill: var(--text-white);
+        }
+
+        /* Page corner decorations */
+        .page-decoration {
+            position: fixed;
+            z-index: -1;
+            opacity: 0.015;
+            pointer-events: none;
+        }
+
+        .page-decoration.top-left {
+            top: 20px;
+            left: 20px;
+            width: 100px;
+            height: 100px;
+            border-top: 1px solid var(--text-white);
+            border-left: 1px solid var(--text-white);
+        }
+
+        .page-decoration.top-right {
+            top: 20px;
+            right: 20px;
+            width: 100px;
+            height: 100px;
+            border-top: 1px solid var(--text-white);
+            border-right: 1px solid var(--text-white);
+        }
+
+        .page-decoration.bottom-left {
+            bottom: 20px;
+            left: 20px;
+            width: 100px;
+            height: 100px;
+            border-bottom: 1px solid var(--text-white);
+            border-left: 1px solid var(--text-white);
+        }
+
+        .page-decoration.bottom-right {
+            bottom: 20px;
+            right: 20px;
+            width: 100px;
+            height: 100px;
+            border-bottom: 1px solid var(--text-white);
+            border-right: 1px solid var(--text-white);
+        }
+
+        /* Mobile Optimizations */
+        @media screen and (max-width: 768px) {
+            .login-container {
+                width: 90%;
+                max-width: none;
+                margin: 20px auto;
+                padding: 20px;
+            }
+
+            .login-header {
+                font-size: 2rem;
+            }
+
+            .input-group {
+                margin-bottom: 15px;
+            }
+
+            .input-field {
+                padding: 12px;
+                font-size: 1rem;
+            }
+
+            .login-button {
+                padding: 15px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Page Decorations -->
+    <div class="page-decoration top-left"></div>
+    <div class="page-decoration top-right"></div>
+    <div class="page-decoration bottom-left"></div>
+    <div class="page-decoration bottom-right"></div>
+
+    <header>
+        <div class="header-content">
+            <a href="index.html" class="logo">RockstarCareers</a>
+        </div>
+    </header>
+
+    <main class="login-container">
+        <div class="login-header">
+            <h1>Login</h1>
+        </div>
+
+        <form action="profile.html" method="POST">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <button type="submit" class="login-btn">Login</button>
+
+            <div class="auth-divider">
+                <span>♠</span>
+            </div>
+
+            <button type="button" class="google-btn">
+                <svg class="google-icon" viewBox="0 0 24 24">
+                    <path d="M12.545,10.239v3.821h5.445c-0.712,2.315-2.647,3.972-5.445,3.972c-3.332,0-6.033-2.701-6.033-6.032s2.701-6.032,6.033-6.032c1.498,0,2.866,0.549,3.921,1.453l2.814-2.814C17.503,2.988,15.139,2,12.545,2C7.021,2,2.543,6.477,2.543,12s4.478,10,10.002,10c8.396,0,10.249-7.85,9.426-11.748L12.545,10.239z"/>
+                </svg>
+                Sign in with Google
+            </button>
+
+            <div class="form-footer">
+                <a href="#signup">Create Account</a>
+                <span class="separator">•</span>
+                <a href="#forgot-password">Forgot Password?</a>
+            </div>
+        </form>
+    </main>
+</body>
+</html> 
