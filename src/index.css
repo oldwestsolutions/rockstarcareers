@@ -1,0 +1,14 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--dark-bg);
+  color: var(--text-light);
+  font-family: 'Cormorant Garamond', serif;
+  line-height: 1.7;
+  min-height: 100vh;
+  letter-spacing: 0.02em;
+} 
