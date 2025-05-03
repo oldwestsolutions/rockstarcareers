@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import ApplicationModal from './components/ApplicationModal';
 import './App.css';
+import LoginModal from './components/LoginModal';
 
 const App: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
   const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => setIsModalOpen(false);
@@ -12,101 +14,261 @@ const App: React.FC = () => {
     handleCloseModal();
   };
 
+  const handleLogin = (email: string, password: string) => {
+    // TODO: Implement actual login logic
+    console.log('Login attempt with:', email, password);
+    setIsLoginModalOpen(false);
+  };
+
   return (
     <div className="app">
-      <header>
-        <div className="header-content">
-          <h1 className="logo">RockstarCareers</h1>
-          <p className="logo-subtitle">Chronicles of Professional Destiny</p>
-        </div>
-      </header>
-      
       <nav>
         <div className="container">
-          <ul className="nav-list">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Find Jobs</a></li>
-            <li><a href="#">Companies</a></li>
-            <li><a href="#">Career Resources</a></li>
-            <li><a href="#">For Employers</a></li>
-            <li><a href="#">Sign In</a></li>
-          </ul>
+          <div className="nav-content">
+            <div className="nav-left">
+              <h1 className="logo">RockstarCareers</h1>
+              <p className="logo-subtitle">Chronicles of Professional Destiny</p>
+            </div>
+            <div className="nav-center">
+              <div className="search-bar">
+                <input type="text" placeholder="Search for jobs, skills, or companies..." />
+                <button><i className="fas fa-search"></i></button>
+              </div>
+            </div>
+            <div className="nav-right">
+              <button className="login-button" onClick={() => setIsLoginModalOpen(true)}>
+                Login
+              </button>
+            </div>
+          </div>
         </div>
       </nav>
       
-      <section className="hero">
-        <div className="hero-content">
-          <h2>Discover Your Next Career Opportunity</h2>
-          <p>Unveil positions worthy of your talents within the shadows of the industry.</p>
-          <div className="search-bar">
-            <input type="text" placeholder="Position title, skills, location..." />
-            <button>Search</button>
-          </div>
-          <div className="trending-searches">
-            Whispered inquiries: <span>Nocturnalist</span> • <span>Arcane Affairs</span> • <span>Shadow Curator</span> • <span>Ethereal Design</span>
-          </div>
-        </div>
-      </section>
-      
       <main className="container">
         <section className="featured-jobs">
-          <h2 className="section-title">The Chronicle of Vacancies</h2>
-          <p className="section-description">Positions of distinction for the discerning professional</p>
+          <h2 className="section-title">Industry Chronicles</h2>
+          <p className="section-description">Explore opportunities across diverse realms of expertise</p>
           
-          <div className="job-grid">
-            <div className="job-card">
-              <div className="job-bookmark">☆</div>
-              <div className="job-card-header">
-                <div className="company-logo">NV</div>
-                <div>
-                  <h3 className="job-title">Senior Audio Engineer <span className="new-badge">New</span></h3>
-                  <p className="company-name">Nocturne Studios</p>
+          <div className="industry-section">
+            <h3 className="industry-title">Technology & Innovation</h3>
+            <div className="job-grid horizontal">
+              <div className="job-card">
+                <div className="job-bookmark"><i className="fas fa-bookmark"></i></div>
+                <div className="job-card-header">
+                  <div className="company-logo">TS</div>
+                  <div>
+                    <h3 className="job-title">Tech Skills Bootcamp <span className="new-badge">New</span></h3>
+                    <p className="company-name">Tech Solutions Inc.</p>
+                  </div>
+                </div>
+                <div className="job-card-body">
+                  <div className="job-meta">
+                    <div><i className="fas fa-map-marker-alt"></i> Online & In-Person</div>
+                    <div><i className="fas fa-dollar-sign"></i> <span className="job-salary">$2,500 - $5,000</span></div>
+                    <div><i className="fas fa-clock"></i> 12 Weeks</div>
+                  </div>
+                  <div className="job-description">
+                    Comprehensive training in modern web development, cloud computing, and data analysis. Includes job placement assistance and industry certifications.
+                  </div>
+                  <div className="job-tags">
+                    <span className="job-tag">Web Development</span>
+                    <span className="job-tag">Cloud Computing</span>
+                    <span className="job-tag">Data Analysis</span>
+                  </div>
+                  <button className="btn" onClick={handleOpenModal}>Enroll Now</button>
                 </div>
               </div>
-              <div className="job-card-body">
-                <div className="job-meta">
-                  <div>📍 Los Angeles, CA</div>
-                  <div>💰 <span className="job-salary">$95K - $120K</span></div>
-                  <div>⏰ Full-time</div>
+
+              <div className="job-card">
+                <div className="job-bookmark"><i className="fas fa-bookmark"></i></div>
+                <div className="job-card-header">
+                  <div className="company-logo">AI</div>
+                  <div>
+                    <h3 className="job-title">AI & Machine Learning Fundamentals <span className="new-badge">Trending</span></h3>
+                    <p className="company-name">AI Institute</p>
+                  </div>
                 </div>
-                <div className="job-description">
-                  Oversee recording sessions and audio production for high-profile artists. Expertise in analog and digital recording techniques required with attention to sonic detail.
+                <div className="job-card-body">
+                  <div className="job-meta">
+                    <div><i className="fas fa-map-marker-alt"></i> Online</div>
+                    <div><i className="fas fa-dollar-sign"></i> <span className="job-salary">$3,500 - $6,000</span></div>
+                    <div><i className="fas fa-clock"></i> 16 Weeks</div>
+                  </div>
+                  <div className="job-description">
+                    Dive into artificial intelligence and machine learning with practical applications. Learn Python, TensorFlow, and neural networks through hands-on projects.
+                  </div>
+                  <div className="job-tags">
+                    <span className="job-tag">Python</span>
+                    <span className="job-tag">Machine Learning</span>
+                    <span className="job-tag">Neural Networks</span>
+                  </div>
+                  <button className="btn" onClick={handleOpenModal}>Enroll Now</button>
                 </div>
-                <div className="job-tags">
-                  <span className="job-tag">Pro Tools</span>
-                  <span className="job-tag">Mixing</span>
-                  <span className="job-tag">Mastering</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="industry-section">
+            <h3 className="industry-title">Finance & Business</h3>
+            <div className="job-grid horizontal">
+              <div className="job-card">
+                <div className="job-bookmark"><i className="fas fa-bookmark"></i></div>
+                <div className="job-card-header">
+                  <div className="company-logo">PM</div>
+                  <div>
+                    <h3 className="job-title">Project Management Professional <span className="new-badge">Certified</span></h3>
+                    <p className="company-name">Project Masters</p>
+                  </div>
                 </div>
-                <button className="btn" onClick={handleOpenModal}>Apply Now</button>
+                <div className="job-card-body">
+                  <div className="job-meta">
+                    <div><i className="fas fa-map-marker-alt"></i> Hybrid</div>
+                    <div><i className="fas fa-dollar-sign"></i> <span className="job-salary">$3,000 - $4,500</span></div>
+                    <div><i className="fas fa-clock"></i> 10 Weeks</div>
+                  </div>
+                  <div className="job-description">
+                    Prepare for PMP certification with expert-led training in project management methodologies, risk management, and team leadership. Includes exam preparation.
+                  </div>
+                  <div className="job-tags">
+                    <span className="job-tag">PMP</span>
+                    <span className="job-tag">Agile</span>
+                    <span className="job-tag">Leadership</span>
+                  </div>
+                  <button className="btn" onClick={handleOpenModal}>Enroll Now</button>
+                </div>
+              </div>
+
+              <div className="job-card">
+                <div className="job-bookmark"><i className="fas fa-bookmark"></i></div>
+                <div className="job-card-header">
+                  <div className="company-logo">DM</div>
+                  <div>
+                    <h3 className="job-title">Digital Marketing Mastery <span className="new-badge">Popular</span></h3>
+                    <p className="company-name">Digital Masters Academy</p>
+                  </div>
+                </div>
+                <div className="job-card-body">
+                  <div className="job-meta">
+                    <div><i className="fas fa-map-marker-alt"></i> Online</div>
+                    <div><i className="fas fa-dollar-sign"></i> <span className="job-salary">$1,800 - $3,200</span></div>
+                    <div><i className="fas fa-clock"></i> 8 Weeks</div>
+                  </div>
+                  <div className="job-description">
+                    Master the art of digital marketing with hands-on training in SEO, social media marketing, content strategy, and analytics. Includes real-world project experience.
+                  </div>
+                  <div className="job-tags">
+                    <span className="job-tag">SEO</span>
+                    <span className="job-tag">Social Media</span>
+                    <span className="job-tag">Analytics</span>
+                  </div>
+                  <button className="btn" onClick={handleOpenModal}>Enroll Now</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="industry-section">
+            <h3 className="industry-title">Creative Arts & Design</h3>
+            <div className="job-grid horizontal">
+              <div className="job-card">
+                <div className="job-bookmark"><i className="fas fa-bookmark"></i></div>
+                <div className="job-card-header">
+                  <div className="company-logo">AD</div>
+                  <div>
+                    <h3 className="job-title">Advanced Digital Design <span className="new-badge">New</span></h3>
+                    <p className="company-name">Artistic Design Studio</p>
+                  </div>
+                </div>
+                <div className="job-card-body">
+                  <div className="job-meta">
+                    <div><i className="fas fa-map-marker-alt"></i> Hybrid</div>
+                    <div><i className="fas fa-dollar-sign"></i> <span className="job-salary">$2,800 - $4,200</span></div>
+                    <div><i className="fas fa-clock"></i> 12 Weeks</div>
+                  </div>
+                  <div className="job-description">
+                    Master advanced digital design techniques, including UI/UX, motion graphics, and 3D modeling. Work on real client projects and build a professional portfolio.
+                  </div>
+                  <div className="job-tags">
+                    <span className="job-tag">UI/UX</span>
+                    <span className="job-tag">Motion Graphics</span>
+                    <span className="job-tag">3D Modeling</span>
+                  </div>
+                  <button className="btn" onClick={handleOpenModal}>Enroll Now</button>
+                </div>
+              </div>
+
+              <div className="job-card">
+                <div className="job-bookmark"><i className="fas fa-bookmark"></i></div>
+                <div className="job-card-header">
+                  <div className="company-logo">CD</div>
+                  <div>
+                    <h3 className="job-title">Creative Direction Masterclass <span className="new-badge">Elite</span></h3>
+                    <p className="company-name">Creative Directors Guild</p>
+                  </div>
+                </div>
+                <div className="job-card-body">
+                  <div className="job-meta">
+                    <div><i className="fas fa-map-marker-alt"></i> In-Person</div>
+                    <div><i className="fas fa-dollar-sign"></i> <span className="job-salary">$4,500 - $6,500</span></div>
+                    <div><i className="fas fa-clock"></i> 16 Weeks</div>
+                  </div>
+                  <div className="job-description">
+                    Learn the art of creative direction from industry leaders. Develop skills in visual storytelling, brand strategy, and team leadership in creative environments.
+                  </div>
+                  <div className="job-tags">
+                    <span className="job-tag">Visual Storytelling</span>
+                    <span className="job-tag">Brand Strategy</span>
+                    <span className="job-tag">Team Leadership</span>
+                  </div>
+                  <button className="btn" onClick={handleOpenModal}>Enroll Now</button>
+                </div>
               </div>
             </div>
           </div>
         </section>
 
         <section className="categories">
-          <h2 className="section-title">Realms of Opportunity</h2>
-          <p className="section-description">Explore the diverse domains where your talents may find their true calling</p>
+          <h2 className="section-title">Resume Building Resources</h2>
+          <p className="section-description">Master the art of crafting a compelling resume that stands out</p>
           
           <div className="category-grid">
             <div className="category-card">
-              <div className="category-icon">🎵</div>
-              <h3 className="category-title">Music Production</h3>
-              <p className="category-count">42 Open Positions</p>
+              <div className="category-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/>
+                </svg>
+              </div>
+              <h3 className="category-title">Resume Templates</h3>
+              <p className="category-count">50+ Templates</p>
             </div>
             <div className="category-card">
-              <div className="category-icon">🎭</div>
-              <h3 className="category-title">Performing Arts</h3>
-              <p className="category-count">28 Open Positions</p>
+              <div className="category-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                </svg>
+              </div>
+              <h3 className="category-title">ATS Optimization</h3>
+              <p className="category-count">Expert Tips</p>
             </div>
             <div className="category-card">
-              <div className="category-icon">🎨</div>
-              <h3 className="category-title">Visual Arts</h3>
-              <p className="category-count">35 Open Positions</p>
+              <div className="category-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+              </div>
+              <h3 className="category-title">Industry-Specific</h3>
+              <p className="category-count">15 Industries</p>
             </div>
             <div className="category-card">
-              <div className="category-icon">📱</div>
-              <h3 className="category-title">Digital Media</h3>
-              <p className="category-count">56 Open Positions</p>
+              <div className="category-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                  <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                </svg>
+              </div>
+              <h3 className="category-title">Skills Showcase</h3>
+              <p className="category-count">100+ Examples</p>
             </div>
           </div>
         </section>
@@ -216,6 +378,12 @@ const App: React.FC = () => {
         isOpen={isModalOpen}
         onClose={handleCloseModal}
         onSubmit={handleSubmit}
+      />
+
+      <LoginModal
+        isOpen={isLoginModalOpen}
+        onClose={() => setIsLoginModalOpen(false)}
+        onLogin={handleLogin}
       />
     </div>
   );
