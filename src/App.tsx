@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import ApplicationModal from './components/ApplicationModal';
 import './App.css';
 import LoginModal from './components/LoginModal';
@@ -22,6 +23,7 @@ const App: React.FC = () => {
 
   return (
     <div className="app">
+      <Analytics />
       <nav>
         <div className="container">
           <div className="nav-content">
